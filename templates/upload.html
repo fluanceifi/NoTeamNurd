@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Video Stream</title>
+</head>
+<body>
+<h3>Live Video Stream</h3>
+<img src="{{ url_for('video_feed') }}" width="50%">
+<p>Major: {{ session['major'] }}</p>
+<p>Student ID: {{ session['student_id'] }}</p>
+<p>Name: {{ session['name'] }}</p>
+</body>
+</html>

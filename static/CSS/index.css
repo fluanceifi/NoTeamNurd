@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    background-image: url(../PHOTO/bg.JPEG);
+    background-size: cover;
+    padding-right: 300px;
+    overflow: hidden; /* 스크롤바 방지 */
+}
+
+.background-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw; /* 브라우저 너비 꽉 채움 */
+    height: 100vh; /* 브라우저 높이 꽉 채움 */
+    z-index: 0;
+}
+
+.foreground-window {
+    position: relative;
+    width: 350px;
+    height: 500px;
+    background-color: rgba(245, 239, 255, 0.85);
+    border-radius: 6px; /* 둥근 모서리 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(79, 82, 119);
+    z-index: 1;
+    padding: 50px; /* 내부 여백 */
+    box-shadow: 0 2px 4px rgba(245, 239, 255, 0.66);
+}
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* 수직 가운데 정렬 */
+    align-items: center;      /* 수평 가운데 정렬 */
+    width: 100%;
+}
+
+.login_box {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login_input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border: 0;
+    background-color: rgba(245, 239, 255, 0);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    transition: border-color 0.6s ease-in-out;
+    outline: none;
+}
+
+.login_input::placeholder { /* 클래스 이름 수정 */
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.login_input:focus {
+    border-bottom: 1px solid rgb(183, 60, 103);
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.login_btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    background-color: rgb(183, 60, 103, 0.8);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.login_btn:hover {
+    background-color: rgb(183, 60, 103, 0.7);
+}
