@@ -95,3 +95,50 @@ if skin_pixels.shape[0] == 0:
 else:
     mean_rgb = np.mean(skin_pixels, axis=0)
     print(f"📊 평균 RGB 값: R={mean_rgb[0]:.1f}, G={mean_rgb[1]:.1f}, B={mean_rgb[2]:.1f}")
+
+
+# HSV + RGB구하는 코드 
+
+skin_pixels = image_np[skin_mask]  # shape: (N, 3)
+
+if skin_pixels.shape[0] == 0:
+    print("❗️마스크에 해당하는 픽셀이 없습니다.")
+else:
+    # RGB 평균
+    mean_rgb = np.mean(skin_pixels, axis=0)
+    print(f"📊 평균 RGB 값: R={mean_rgb[0]:.1f}, G={mean_rgb[1]:.1f}, B={mean_rgb[2]:.1f}")
+
+    # RGB → HSV 수식 변환용: 0~1로 정규화
+    rgb = skin_pixels.astype(np.float32) / 255.0
+    r, g, b = rgb[:, 0], rgb[:, 1], rgb[:, 2]
+
+    cmax = np.max(rgb, axis=1)  # V
+    cmin = np.min(rgb, axis=1)
+    delta = cmax - cmin
+
+    # H 계산
+    h = np.zeros_like(cmax)
+
+    # 조건별로 H 계산
+    mask = delta != 0
+    r_eq = (cmax == r) & mask
+    g_eq = (cmax == g) & mask
+    b_eq = (cmax == b) & mask
+
+    h[r_eq] = (60 * ((g[r_eq] - b[r_eq]) / delta[r_eq])) % 360
+    h[g_eq] = (60 * ((b[g_eq] - r[g_eq]) / delta[g_eq]) + 120) % 360
+    h[b_eq] = (60 * ((r[b_eq] - g[b_eq]) / delta[b_eq]) + 240) % 360
+
+    # S 계산
+    s = np.zeros_like(cmax)
+    s[cmax != 0] = delta[cmax != 0] / cmax[cmax != 0]
+
+    # V = cmax
+    v = cmax
+
+    # 평균 HSV
+    mean_h = np.mean(h)
+    mean_s = np.mean(s) * 100
+    mean_v = np.mean(v) * 100
+
+    print(f"📊 평균 HSV 값: H={mean_h:.1f}, S={mean_s:.1f}, V={mean_v:.1f}")
