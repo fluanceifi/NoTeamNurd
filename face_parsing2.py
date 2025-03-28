@@ -78,9 +78,6 @@ image_np = image[0].permute(1, 2, 0).cpu().numpy()  # shape: (506, 524, 3)
 
 plt.imshow(image_np)
 
-import numpy as np
-import cv2
-
 # 1. 피부 부위 마스크 생성 (클래스 번호 1 = face_skin) - True / False 로 구분된 이미지 - 피부부위 마스크를 만들기 위해서
 skin_mask_tensor = (parsed_classes == 1)
 skin_mask = skin_mask_tensor.squeeze().cpu().numpy().astype(bool)  # shape: (H, W)
