@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
+type ColorType = '봄 웜톤' | '여름 쿨톤' | '가을 웜톤' | '겨울 쿨톤';
+
 const BACKGROUND_COLORS = [
   { id: 1, name: '웜 아이보리', color: '#FFF5E1', image: '/images/photo1.jpg' },
   { id: 2, name: '쿨 화이트', color: '#F5F5F5', image: '/images/photo2.jpg' },
@@ -13,6 +15,8 @@ const BACKGROUND_COLORS = [
 export default function ResultPage() {
   const router = useRouter();
   const [selectedColor, setSelectedColor] = useState<number | null>(null);
+  // 실제로는 API나 props로 받아와야 하는 값입니다
+  const colorResult: ColorType = '봄 웜톤';
 
   const handleColorSelect = (colorId: number) => {
     setSelectedColor(colorId);
@@ -33,6 +37,9 @@ export default function ResultPage() {
         
         <div className="space-y-6">
           <div className="text-center mb-8">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              당신의 퍼스널 컬러는 <span className="text-amber-500">{colorResult}</span> 입니다
+            </h2>
             <p className="text-lg text-gray-700 mb-2">
               분석 결과에 따른 최적의 배경색을 선택해주세요.
             </p>
