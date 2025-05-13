@@ -1,67 +1,99 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
 
 export default function ExpressionPage() {
   const params = useParams();
-  const photoId = params.id;
+  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 3;
 
-  const handleExpressionChange = async () => {
+  const backgroundId = params.id as string;
+  const BACKGROUND_COLORS = {
+    '1': '#FFF5E1',
+    '2': '#F5F5F5',
+    '3': '#E6F3FF',
+  };
+
+  useEffect(() => {
+    if (isProcessing) {
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => {
+          if (prev >= totalSteps) {
+            setIsProcessing(false);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isProcessing, currentStep]);
+
+  const handleStartProcessing = () => {
     setIsProcessing(true);
-    // 여기에 표정 수정 로직 추가
-    setTimeout(() => {
-      setIsProcessing(false);
-    }, 2000);
+  };
+
+  const handleComplete = () => {
+    // TODO: 최종 이미지 저장 및 다운로드 로직 구현
+    router.push(`/result/final/${backgroundId}`);
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-pink-100/80 to-blue-100/80 p-4">
-      <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-8 max-w-4xl w-full">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          표정 자연스럽게 수정하기
-        </h2>
-        <p className="text-center text-gray-600 mb-8">
-          AI가 자연스러운 표정으로 수정해드립니다
-        </p>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-pink-100/80 to-blue-100/80 p-4">
+      <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-8 max-w-2xl w-full">
+        <h1 className="text-2xl font-bold text-center mb-6">
+          표정 자연스럽게 만들기
+        </h1>
 
-        <div className="flex justify-center mb-8">
-          <div className="relative w-64 aspect-[3/4]">
-            <Image
-              src={`/images/photo${photoId}.jpg`}
-              alt="선택된 사진"
-              fill
-              className="object-cover rounded-lg"
-            />
-          </div>
-        </div>
+        <div className="space-y-6">
+          {!isProcessing ? (
+            <div className="text-center">
+              <p className="text-lg text-gray-700 mb-4">
+                AI가 자연스러운 표정으로 수정해드립니다.
+              </p>
+              <button
+                onClick={handleStartProcessing}
+                className="px-6 py-2 bg-pink-100/70 hover:bg-pink-200/80 text-gray-700 rounded-lg transition duration-300"
+              >
+                시작하기
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="relative h-4 bg-gray-200 rounded-full">
+                <div
+                  className="absolute h-full bg-sky-100/70 rounded-full transition-all duration-500"
+                  style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+                />
+              </div>
+              
+              <div className="text-center">
+                <p className="text-lg font-medium text-gray-700">
+                  {currentStep === 1 && '표정 분석 중...'}
+                  {currentStep === 2 && '자연스러운 표정 생성 중...'}
+                  {currentStep === 3 && '최종 이미지 생성 완료!'}
+                </p>
+              </div>
 
-        <div className="flex flex-col items-center gap-4">
-          <button
-            onClick={handleExpressionChange}
-            disabled={isProcessing}
-            className={`px-8 py-3 rounded-lg transition-all duration-300 ${
-              isProcessing
-                ? 'bg-gray-300 cursor-not-allowed'
-                : 'bg-pink-100/70 hover:bg-pink-200/80 text-gray-700'
-            }`}
-          >
-            {isProcessing ? '처리중...' : '표정 자연스럽게 수정하기'}
-          </button>
-
-          {!isProcessing && (
-            <Link
-              href={`/result/final/${photoId}`}
-              className="px-8 py-3 rounded-lg bg-sky-100/70 hover:bg-sky-200/80 text-gray-700 transition-all duration-300"
-            >
-              다음 단계로
-            </Link>
+              {currentStep === totalSteps && (
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={handleComplete}
+                    className="px-6 py-2 bg-pink-100/70 hover:bg-pink-200/80 text-gray-700 rounded-lg transition duration-300"
+                  >
+                    완료
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
-    </main>
+    </div>
   );
 } 

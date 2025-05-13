@@ -1,67 +1,91 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
+
+const BACKGROUND_COLORS = [
+  { id: 1, name: '웜 아이보리', color: '#FFF5E1', image: '/images/photo1.jpg' },
+  { id: 2, name: '쿨 화이트', color: '#F5F5F5', image: '/images/photo2.jpg' },
+  { id: 3, name: '소프트 블루', color: '#E6F3FF', image: '/images/photo3.jpg' },
+];
 
 export default function ResultPage() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const router = useRouter();
+  const [selectedColor, setSelectedColor] = useState<number | null>(null);
 
-  const recommendedPhotos = [
-    { id: 1, src: '/images/photo1.jpg', background: '파스텔 핑크' },
-    { id: 2, src: '/images/photo2.jpg', background: '소프트 블루' },
-    { id: 3, src: '/images/photo3.jpg', background: '라이트 그레이' },
-  ];
+  const handleColorSelect = (colorId: number) => {
+    setSelectedColor(colorId);
+  };
+
+  const handleNext = () => {
+    if (selectedColor) {
+      router.push(`/result/expression/${selectedColor}`);
+    }
+  };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-pink-100/80 to-blue-100/80 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-pink-100/80 to-blue-100/80 p-4">
       <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-8 max-w-4xl w-full">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          추천 증명사진
-        </h2>
-        <p className="text-center text-gray-600 mb-8">
-          가장 잘 어울리는 배경색으로 3가지 스타일을 추천해드립니다
-        </p>
+        <h1 className="text-2xl font-bold text-center mb-6">
+          퍼스널컬러 분석 결과
+        </h1>
+        
+        <div className="space-y-6">
+          <div className="text-center mb-8">
+            <p className="text-lg text-gray-700 mb-2">
+              분석 결과에 따른 최적의 배경색을 선택해주세요.
+            </p>
+            <p className="text-sm text-gray-500">
+              기본적인 피부보정이 완료되었습니다.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {recommendedPhotos.map((photo) => (
-            <div
-              key={photo.id}
-              className={`relative rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ${
-                selectedImage === photo.id
-                  ? 'ring-4 ring-blue-400 transform scale-105'
-                  : 'hover:shadow-lg'
-              }`}
-              onClick={() => setSelectedImage(photo.id)}
-            >
-              <div className="aspect-[3/4] relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {BACKGROUND_COLORS.map((bg) => (
+              <div
+                key={bg.id}
+                onClick={() => handleColorSelect(bg.id)}
+                className={`relative aspect-[3/4] rounded-lg overflow-hidden cursor-pointer transition-all duration-300 ${
+                  selectedColor === bg.id
+                    ? 'ring-4 ring-blue-400 transform scale-105'
+                    : 'hover:shadow-lg'
+                }`}
+              >
                 <Image
-                  src={photo.src}
-                  alt={`추천 스타일 ${photo.id}`}
+                  src={bg.image}
+                  alt={`배경색 ${bg.name}`}
                   fill
                   className="object-cover"
                 />
+                <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-3 text-center">
+                  {bg.name}
+                </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-3 text-center">
-                {photo.background}
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="flex justify-center">
-          <Link
-            href={selectedImage ? `/result/expression/${selectedImage}` : '#'}
-            className={`px-8 py-3 rounded-lg transition-all duration-300 ${
-              selectedImage
-                ? 'bg-pink-100/70 hover:bg-pink-200/80 text-gray-700'
-                : 'bg-gray-300 cursor-not-allowed text-gray-500'
-            }`}
-          >
-            다음 단계로
-          </Link>
+          <div className="flex justify-center mt-8 space-x-4">
+            <button
+              onClick={() => router.push('/')}
+              className="px-6 py-2 bg-sky-100/70 hover:bg-sky-200/80 text-gray-700 rounded-lg transition duration-300"
+            >
+              처음으로
+            </button>
+            <button
+              onClick={handleNext}
+              disabled={!selectedColor}
+              className={`px-6 py-2 rounded-lg transition duration-300 ${
+                selectedColor
+                  ? 'bg-pink-100/70 hover:bg-pink-200/80 text-gray-700'
+                  : 'bg-gray-300 cursor-not-allowed text-gray-500'
+              }`}
+            >
+              다음 단계로
+            </button>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 } 
