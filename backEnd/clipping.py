@@ -4,8 +4,7 @@ import io
 import colorsys
 
 
-input_path = f'static/captured.jpg'
-output_path = f'static/captured_clipping.jpg'
+
 
 def remove_background(input_path: str) -> bytes:
     with open(input_path, 'rb') as i:
@@ -36,8 +35,3 @@ def hsv_to_rgb_int(h: float, s: float, v: float) -> tuple[int, int, int]:
     r, g, b = colorsys.hsv_to_rgb(h, s, v)
     return int(r * 255), int(g * 255), int(b * 255)
 
-
-if __name__ == '__main__':
-    bg_removed = remove_background(input_path)
-    filled = fill_transparent_background(bg_removed, color_rgb=(255, 255, 255)) #일단 흰색 (나중에 변수로 받아서 퍼스널컬러에 맞게 변환)
-    filled.save(output_path, 'JPEG')
