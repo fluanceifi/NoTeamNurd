@@ -9,31 +9,47 @@ export default function UploadPage() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null); // ✅ File 객체 저장용
   const [isUploading, setIsUploading] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
+    const selected = e.target.files?.[0];
+    if (selected) {
+      setFile(selected); // ✅ 파일 저장
       const reader = new FileReader();
       reader.onload = (e) => {
         setSelectedImage(e.target?.result as string);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(selected);
     }
   };
 
   const handleUpload = async () => {
-    if (!selectedImage) return;
-    
+    if (!file) return;
+
     setIsUploading(true);
     try {
-      // TODO: 여기에 실제 업로드 및 분석 로직 추가
-      // 임시로 3초 후 결과 페이지로 이동
-      setTimeout(() => {
-        router.push('/result');
-      }, 3000);
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('http://127.0.0.1:5000/upload', {
+  method: 'POST',
+  body: formData,
+});
+
+
+      const data = await res.json();
+
+      if (data.success) {
+        console.log('분석 결과:', data.result);
+        router.push('/result'); // 필요시 쿼리로 result 넘기기 가능
+      } else {
+        alert('분석 실패: ' + data.error);
+      }
     } catch (error) {
       console.error('업로드 중 오류 발생:', error);
+      alert('서버 오류');
+    } finally {
       setIsUploading(false);
     }
   };
@@ -43,15 +59,13 @@ export default function UploadPage() {
       <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-8 max-w-2xl w-full">
         <div className="space-y-6">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">
-              사진 업로드
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">사진 업로드</h1>
             <p className="text-sm text-gray-500">
               증명사진으로 변환할 이미지를 선택해주세요
             </p>
           </div>
 
-          <div 
+          <div
             className="relative aspect-[3/4] max-w-xs mx-auto border-2 border-dashed border-gray-300 rounded-lg overflow-hidden hover:border-gray-400 transition-colors cursor-pointer"
             onClick={() => fileInputRef.current?.click()}
           >
@@ -87,9 +101,9 @@ export default function UploadPage() {
             </button>
             <button
               onClick={handleUpload}
-              disabled={!selectedImage || isUploading}
+              disabled={!file || isUploading}
               className={`px-8 py-3 rounded-lg text-gray-700 transition duration-300 ${
-                !selectedImage || isUploading
+                !file || isUploading
                   ? 'bg-gray-300 cursor-not-allowed'
                   : 'bg-pink-100/70 hover:bg-pink-200/80'
               }`}
@@ -101,4 +115,4 @@ export default function UploadPage() {
       </div>
     </div>
   );
-} 
+}

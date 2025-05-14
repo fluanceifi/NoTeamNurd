@@ -1,32 +1,55 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Webcam from 'react-webcam';
+import dynamic from 'next/dynamic'; // ✅ 추가
 import { useRouter } from 'next/navigation';
+
+const Webcam = dynamic(() => import('react-webcam'), { ssr: false }); // ✅ 수정
+
 
 export default function CapturePage() {
   const webcamRef = useRef<Webcam>(null);
   const router = useRouter();
   const [isCapturing, setIsCapturing] = useState(false);
 
-  const captureImage = async () => {
-    if (!webcamRef.current) return;
-    
-    setIsCapturing(true);
-    try {
-      const imageSrc = webcamRef.current.getScreenshot();
-      if (imageSrc) {
-        // TODO: 여기에 퍼스널컬러 분석 로직 추가
-        // 임시로 3초 후 결과 페이지로 이동
-        setTimeout(() => {
-          router.push('/result');
-        }, 3000);
+ const captureImage = async () => {
+  if (!webcamRef.current) return;
+
+  setIsCapturing(true);
+  try {
+    const imageSrc = webcamRef.current.getScreenshot(); // base64 문자열
+
+    if (imageSrc) {
+      // 📌 base64 → File 변환
+      const blob = await (await fetch(imageSrc)).blob();
+      const file = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
+
+      // 📤 Flask로 전송
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('http://localhost:5050/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      console.log('Flask 응답:', data);
+
+      if (data.success) {
+        router.push('/result');
+      } else {
+        alert('서버 오류: ' + data.message);
       }
-    } catch (error) {
-      console.error('캡처 중 오류 발생:', error);
     }
+  } catch (error) {
+    console.error('업로드 중 오류 발생:', error);
+    alert('업로드 실패');
+  } finally {
     setIsCapturing(false);
-  };
+  }
+};
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-pink-100/80 to-blue-100/80 p-4">
