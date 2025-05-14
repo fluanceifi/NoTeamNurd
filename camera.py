@@ -25,7 +25,7 @@ class Camera:
     def capture(self):
         success, frame = self.camera.read()
         if success:
-            filename = f'static/capture_{int(time.time())}.jpg'
+            filename = f'static/captured.jpg'
             cv2.imwrite(filename, frame)
             return filename
         return None
