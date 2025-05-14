@@ -6,12 +6,12 @@ mp_drawing=mp.solutions.drawing_utils
 mp_styles=mp.solutions.drawing_styles
 
 #얼굴1개, 눈과 입의 랜드마크 더 정교하게, 얼굴 검출 신뢰도 0.5이상 일 땐 성공, 0.5이하 일 땐 실패
-mesh=mp_mesh.FaceMesh(max_num_faces=1,refine_landmarks=True, min_detection_confidence=0.5, min_tracking_confidence=0.5)
+mesh=mp_mesh.FaceMesh(max_num_faces=1, refine_landmarks=True, min_detection_confidence=0.5, min_tracking_confidence=0.5)
 
 cap=cv.VideoCapture(0)
 
 while True:
-    ret,frame = cap.read()
+    ret, frame = cap.read()
     if not ret:
         print("프레임 획득에 실패하여 루프를 나갑니다.")
         break
