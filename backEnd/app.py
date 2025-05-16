@@ -2,6 +2,11 @@ from flask import Flask, render_template, Response, request, jsonify
 from camera import camera  # Camera 인스턴스를 가져옴
 import clipping as cp
 from face_parser import analyze_face
+import subprocess
+import os
+import requests
+
+
 
 app = Flask(__name__)
 
@@ -49,5 +54,26 @@ def background():
         return jsonify({'success': False, 'error': str(e)})
 
 
+@app.route('/generate-smile', methods=['POST'])
+def generate_smile():
+    try:
+        input_path = 'static/captured_clipping.jpg'
+        output_path = 'static/clipped_smile.jpg'
+
+        if not os.path.exists(input_path):
+            return jsonify({'error': '입력 이미지가 존재하지 않습니다.'}), 400
+
+        # 웃는 표정 생성 함수 호출
+        create_smile(input_path, output_path)
+
+        if not os.path.exists(output_path):
+            return jsonify({'error': '출력 이미지 생성 실패'}), 500
+
+        return jsonify({'success': True, 'output_image': output_path})
+
+    except Exception as e:
+        print(f"웃는 표정 생성 오류: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
-    app.run(debug=True)
+   app.run(debug=True)
