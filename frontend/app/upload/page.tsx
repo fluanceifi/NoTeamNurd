@@ -32,7 +32,7 @@ export default function UploadPage() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const res = await fetch('http://127.0.0.1:5000/upload', {
+      const res = await fetch('http://127.0.0.1:5050/upload', {
   method: 'POST',
   body: formData,
 });
@@ -65,32 +65,35 @@ export default function UploadPage() {
             </p>
           </div>
 
-          <div
-            className="relative aspect-[3/4] max-w-xs mx-auto border-2 border-dashed border-gray-300 rounded-lg overflow-hidden hover:border-gray-400 transition-colors cursor-pointer"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            {selectedImage ? (
-              <Image
-                src={selectedImage}
-                alt="업로드된 이미지"
-                fill
-                className="object-cover"
-              />
-            ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500">
-                <BiCloudUpload className="w-12 h-12 mb-2" />
-                <p className="text-sm">클릭하여 이미지 선택</p>
-                <p className="text-xs text-gray-400">또는 드래그 앤 드롭</p>
-              </div>
-            )}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="hidden"
-            />
-          </div>
+   <div
+  className="relative aspect-[3/4] max-w-xs mx-auto border-2 border-dashed border-gray-300 rounded-lg overflow-hidden hover:border-gray-400 transition-colors cursor-pointer"
+  onClick={() => fileInputRef.current?.click()}
+>
+  {selectedImage ? (
+    <>
+      <Image
+        src={selectedImage}
+        alt="업로드된 이미지"
+        fill
+        className="object-cover"
+      />
+    </>
+  ) : (
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500">
+      <BiCloudUpload className="w-12 h-12 mb-2" />
+      <p className="text-sm">클릭하여 이미지 선택</p>
+      <p className="text-xs text-gray-400">또는 드래그 앤 드롭</p>
+    </div>
+  )}
+  <input
+    ref={fileInputRef}
+    type="file"
+    accept="image/*"
+    onChange={handleFileChange}
+    className="hidden"
+  />
+</div>
+
 
           <div className="flex justify-center space-x-4">
             <button
