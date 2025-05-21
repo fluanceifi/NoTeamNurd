@@ -1,0 +1,14 @@
+LICENSE.md
+README.md
+setup.py
+facesmoothing/__init__.py
+facesmoothing/main.py
+facesmoothing/smoothing.py
+facesmoothing.egg-info/PKG-INFO
+facesmoothing.egg-info/SOURCES.txt
+facesmoothing.egg-info/dependency_links.txt
+facesmoothing.egg-info/requires.txt
+facesmoothing.egg-info/top_level.txt
+facesmoothing/utility/__init__.py
+facesmoothing/utility/heic2png.py
+facesmoothing/utility/typeCheck.py
