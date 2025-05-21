@@ -121,11 +121,65 @@ def remove_background_rembg(image_path: str) -> str:
     # RGB로 변환 (알파 채널 제거)
     white_background = white_background.convert("RGB")
 
-    # 결과 저장
-    output_path = image_path.replace('.jpg', '_whitebg.jpg')
+    #white 이미지 경로 저장 & 이미지 저장
+    white_path = image_path.replace('.jpg', '_whitebg.jpg')
     white_background.save(output_path)
 
-    return output_path
+    # 추천 계절톤 배경 색상 RGB 값들
+    recommended_colors = get_recommended_backgrounds(hsv_data)  # 여기가 핵심!
+    recommended_paths = []
+
+    for idx, rgb in enumerate(recommended_colors):
+        color_bg = Image.new("RGBA", output_image.size, rgb + (255,))
+        color_bg.paste(output_image, (0, 0), output_image)
+        color_bg = color_bg.convert("RGB")
+        path = image_path.replace('.jpg', f'_reco{idx + 1}.jpg')
+        color_bg.save(path)
+        recommended_paths.append(path)
+
+    return [white_path] + recommended_paths
+
+
+def get_recommended_backgrounds(hsv_data):
+    h, s, v = hsv_data['h'], hsv_data['s'] / 100, hsv_data['v'] / 100
+    tone_table = [
+        # (톤 이름, 계절 카테고리, 색상(H) 범위, 채도(S) 범위, 명도(V) 범위)
+        ('봄 라이트', '봄', (15, 50), (0.3, 0.6), (0.8, 1.0)),
+        ('봄 브라이트', '봄', (10, 45), (0.6, 1.0), (0.8, 1.0)),
+        ('봄 웜', '봄', (10, 40), (0.5, 0.8), (0.7, 1.0)),
+
+        ('여름 라이트', '여름', (180, 260), (0.1, 0.4), (0.7, 1.0)),
+        ('여름 뮤트', '여름', (180, 250), (0.1, 0.5), (0.5, 0.8)),
+        ('여름 쿨', '여름', (190, 260), (0.2, 0.6), (0.6, 0.9)),
+
+        ('가을 뮤트', '가을', (20, 50), (0.2, 0.6), (0.4, 0.7)),
+        ('가을 웜', '가을', (10, 40), (0.6, 1.0), (0.4, 0.7)),
+        ('가을 다크', '가을', (10, 40), (0.4, 0.7), (0.2, 0.5)),
+
+        ('겨울 브라이트', '겨울', (250, 290), (0.6, 1.0), (0.8, 1.0)),
+        ('겨울 딥', '겨울', (250, 300), (0.4, 0.8), (0.2, 0.5)),
+        ('겨울 쿨', '겨울', (240, 300), (0.5, 1.0), (0.6, 0.9)),
+    ]
+
+
+    # 계절 매핑 (3가지 추천색 각각 RGB값이다)
+    tone_palette = {
+        '봄': [(255, 242, 204), (255, 223, 186), (255, 213, 153)],
+        '여름': [(204, 229, 255), (186, 215, 255), (153, 204, 255)],
+        '가을': [(255, 214, 165), (204, 153, 102), (153, 102, 51)],
+        '겨울': [(204, 204, 255), (153, 153, 255), (102, 102, 255)]
+    }
+
+    # 계절 카테고리 판단
+    for tone_name, category, hr, sr, vr in tone_table:
+        if hr[0] <= h <= hr[1] and sr[0] <= s <= sr[1] and vr[0] <= v <= vr[1]:
+            return tone_palette[category] #이게 129Line에서 사용됨
+
+    # fallback
+    return [(200, 200, 200), (180, 180, 180), (160, 160, 160)]  # 회색 계열
+
+
+
 
 app = Flask(__name__)
 CORS(app)
