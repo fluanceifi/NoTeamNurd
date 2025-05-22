@@ -6,6 +6,10 @@ from PIL import Image
 import cv2
 import numpy as np
 from rembg import remove
+import torch
+import facer
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def create_id_photo(image_path: str, target_ratio=(3, 4)) -> str:
@@ -105,60 +109,152 @@ def remove_background_rembg(image_path: str) -> str:
     """
     from rembg import remove
 
-    # 이미지 로드
+    # 1. 이미지 로드
     input_image = Image.open(image_path)
 
-    # rembg를 사용하여 배경 제거
+    # 2. rembg를 사용하여 배경 제거
     output_image = remove(input_image)
 
+    return output_image
+
     # 하얀색 배경 생성
-    white_background = Image.new("RGBA", output_image.size, (255, 255, 255, 255))
+    #white_background = Image.new("RGBA", output_image.size, (255, 255, 255, 255))
 
     # 배경 제거된 이미지를 하얀색 배경 위에 합성
     # 알파 채널을 마스크로 사용
-    white_background.paste(output_image, (0, 0), output_image)
+    #white_background.paste(output_image, (0, 0), output_image)
 
     # RGB로 변환 (알파 채널 제거)
-    white_background = white_background.convert("RGB")
+    #white_background = white_background.convert("RGB")
 
     #white 이미지 경로 저장 & 이미지 저장
-    white_path = image_path.replace('.jpg', '_whitebg.jpg')
-    white_background.save(output_path)
+    #white_path = image_path.replace('.jpg', '_whitebg.jpg')
+    #white_background.save(white_path)
 
-    # 추천 계절톤 배경 색상 RGB 값들
-    recommended_colors = get_recommended_backgrounds(hsv_data)  # 여기가 핵심!
-    recommended_paths = []
-
-    for idx, rgb in enumerate(recommended_colors):
-        color_bg = Image.new("RGBA", output_image.size, rgb + (255,))
-        color_bg.paste(output_image, (0, 0), output_image)
-        color_bg = color_bg.convert("RGB")
-        path = image_path.replace('.jpg', f'_reco{idx + 1}.jpg')
-        color_bg.save(path)
-        recommended_paths.append(path)
-
-    return [white_path] + recommended_paths
+    # 3. 퍼스널컬러 추출하기
 
 
-def get_recommended_backgrounds(hsv_data):
+
+    # 4. 추천 계절톤 배경 색상 RGB 값
+    #recommended_colors = get_recommended_backgrounds(hsv_data)  # 여기가 핵심!
+    #recommended_paths = []
+
+    #for idx, rgb in enumerate(recommended_colors):
+    #    color_bg = Image.new("RGBA", output_image.size, rgb + (255,))
+    #    color_bg.paste(output_image, (0, 0), output_image)
+    #    color_bg = color_bg.convert("RGB")
+    #    path = image_path.replace('.jpg', f'_reco{idx + 1}.jpg')
+    #    color_bg.save(path)
+    #    recommended_paths.append(path)
+
+    #return recommended_paths
+
+def analyze_face(image_path):
+
+
+    # 1. 이미지 로드
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    image = facer.hwc2bchw(facer.read_hwc(image_path)).to(device)
+
+    # 2. Face Parsing
+    face_detector = facer.face_detector('retinaface/mobilenet', device=device)
+    with torch.inference_mode():
+        faces = face_detector(image)
+
+    face_parser = facer.face_parser('farl/lapa/448', device=device)
+    with torch.inference_mode():
+        faces = face_parser(image, faces)
+
+    # 3. 피부 영역 마스크 생성
+    seg_logits = faces['seg']['logits']
+    seg_probs = seg_logits.softmax(dim=1)
+    parsed_classes = seg_probs.argmax(dim=1)
+
+    skin_mask = (parsed_classes == 1).squeeze().cpu().numpy().astype(bool)  # 피부 부위 마스크
+
+    # 🛠 마스크가 정상적으로 생성되었는지 확인
+    print(f"🔍 피부 영역 픽셀 개수: {skin_mask.sum()}")
+    if skin_mask.sum() == 0:
+        print("❗ 피부 영역이 검출되지 않았습니다.")
+        return None
+
+    # 4. RGB 색상 분석
+    image_np = image[0].permute(1, 2, 0).cpu().numpy()
+    skin_pixels = image_np[skin_mask]  # 피부 영역 픽셀 추출
+
+    mean_rgb = np.mean(skin_pixels, axis=0) if skin_pixels.shape[0] > 0 else [0, 0, 0]
+    print(f"📊 평균 RGB 값: R={mean_rgb[0]:.1f}, G={mean_rgb[1]:.1f}, B={mean_rgb[2]:.1f}")
+
+    # 5. HSV 변환
+    skin_pixels = skin_pixels.astype(np.float32) / 255.0  # 0~1 정규화
+    r, g, b = skin_pixels[:, 0], skin_pixels[:, 1], skin_pixels[:, 2]
+
+    cmax = np.max(skin_pixels, axis=1)
+    cmin = np.min(skin_pixels, axis=1)
+    delta = cmax - cmin
+
+    # H 계산 (회색 계열 방지)
+    h = np.zeros_like(cmax)
+    mask = delta != 0
+
+    r_eq = (cmax == r) & mask
+    g_eq = (cmax == g) & mask
+    b_eq = (cmax == b) & mask
+
+    h[r_eq] = (60 * ((g[r_eq] - b[r_eq]) / delta[r_eq])) % 360
+    h[g_eq] = (60 * ((b[g_eq] - r[g_eq]) / delta[g_eq]) + 120) % 360
+    h[b_eq] = (60 * ((r[b_eq] - g[b_eq]) / delta[b_eq]) + 240) % 360
+
+    h[~mask] = 0  # 회색 계열 (delta == 0)일 경우 H = 0
+
+    # S 계산
+    s = np.zeros_like(cmax)
+    s[cmax != 0] = delta[cmax != 0] / cmax[cmax != 0]
+
+    # V 계산
+    v = cmax
+
+    # 평균 HSV 계산
+    mean_h = np.mean(h) if h.size > 0 else 0
+    mean_s = np.mean(s) * 100 if s.size > 0 else 0
+    mean_v = np.mean(v) * 100 if v.size > 0 else 0
+
+    print(f"📊 평균 HSV 값: H={mean_h:.1f}, S={mean_s:.1f}, V={mean_v:.1f}")
+
+    return {
+        #'r': float(round(mean_rgb[0], 1)), rgb는 필요 x
+        #'g': float(round(mean_rgb[1], 1)),
+        #'b': float(round(mean_rgb[2], 1)),
+        'h': float(round(mean_h, 1)),
+        's': float(round(mean_s, 1)),
+        'v': float(round(mean_v, 1))
+    }
+
+
+def get_recommended_backgrounds(hsv_data: dict) -> list:
     h, s, v = hsv_data['h'], hsv_data['s'] / 100, hsv_data['v'] / 100
+    print(f"🔥 분석된 HSV 값: H={h:.1f}, S={s:.2f}, V={v:.2f}")
     tone_table = [
-        # (톤 이름, 계절 카테고리, 색상(H) 범위, 채도(S) 범위, 명도(V) 범위)
-        ('봄 라이트', '봄', (15, 50), (0.3, 0.6), (0.8, 1.0)),
-        ('봄 브라이트', '봄', (10, 45), (0.6, 1.0), (0.8, 1.0)),
-        ('봄 웜', '봄', (10, 40), (0.5, 0.8), (0.7, 1.0)),
+        # (톤 이름, 계절 카테고리, H 범위, S 범위, V 범위)
+        # 🌸 봄 (따뜻하고 밝음)
+        ('봄 라이트', '봄', (10, 60), (0.2, 0.6), (0.75, 1.0)),
+        ('봄 브라이트', '봄', (5, 50), (0.4, 1.0), (0.75, 1.0)),
+        ('봄 웜', '봄', (5, 50), (0.35, 0.75), (0.6, 1.0)),
 
-        ('여름 라이트', '여름', (180, 260), (0.1, 0.4), (0.7, 1.0)),
-        ('여름 뮤트', '여름', (180, 250), (0.1, 0.5), (0.5, 0.8)),
-        ('여름 쿨', '여름', (190, 260), (0.2, 0.6), (0.6, 0.9)),
+        # 🌊 여름 (차갑고 부드러움)
+        ('여름 라이트', '여름', (170, 260), (0.1, 0.5), (0.65, 1.0)),
+        ('여름 뮤트', '여름', (160, 260), (0.1, 0.5), (0.45, 0.8)),
+        ('여름 쿨', '여름', (170, 280), (0.2, 0.6), (0.55, 0.85)),
 
-        ('가을 뮤트', '가을', (20, 50), (0.2, 0.6), (0.4, 0.7)),
-        ('가을 웜', '가을', (10, 40), (0.6, 1.0), (0.4, 0.7)),
-        ('가을 다크', '가을', (10, 40), (0.4, 0.7), (0.2, 0.5)),
+        # 🍂 가을 (따뜻하고 깊이감 있음)
+        ('가을 뮤트', '가을', (10, 60), (0.2, 0.6), (0.35, 0.7)),
+        ('가을 웜', '가을', (5, 55), (0.5, 1.0), (0.35, 0.7)),
+        ('가을 다크', '가을', (5, 50), (0.4, 0.8), (0.2, 0.5)),
 
-        ('겨울 브라이트', '겨울', (250, 290), (0.6, 1.0), (0.8, 1.0)),
-        ('겨울 딥', '겨울', (250, 300), (0.4, 0.8), (0.2, 0.5)),
-        ('겨울 쿨', '겨울', (240, 300), (0.5, 1.0), (0.6, 0.9)),
+        # ❄️ 겨울 (차갑고 또렷함)
+        ('겨울 브라이트', '겨울', (240, 300), (0.5, 1.0), (0.75, 1.0)),
+        ('겨울 딥', '겨울', (230, 310), (0.4, 0.8), (0.25, 0.5)),
+        ('겨울 쿨', '겨울', (220, 300), (0.4, 1.0), (0.5, 0.9)),
     ]
 
 
@@ -178,7 +274,26 @@ def get_recommended_backgrounds(hsv_data):
     # fallback
     return [(200, 200, 200), (180, 180, 180), (160, 160, 160)]  # 회색 계열
 
+def apply_recommended_backgrounds(foreground_img: Image.Image, base_path: str, rgb_list: list) -> list:
+    paths = []
+    for idx, rgb in enumerate(rgb_list):
+        bg = Image.new("RGBA", foreground_img.size, rgb + (255,))
+        bg.paste(foreground_img, (0, 0), foreground_img)
+        bg = bg.convert("RGB")
 
+        path = base_path.replace('.jpg', f'_reco{idx + 1}.jpg')
+        bg.save(path)
+        paths.append(path)
+    return paths
+
+def generate_recommended_images(image_path: str) -> list:
+    foreground = remove_background_rembg(image_path)          # 배경 제거된 인물 이미지
+    hsv_data = analyze_face(image_path)                       # 피부 HSV 분석
+    if hsv_data is None:
+        raise Exception("HSV 분석 실패")
+
+    palette = get_recommended_backgrounds(hsv_data)           # 퍼스널컬러 추천 배경 3가지
+    return apply_recommended_backgrounds(foreground, image_path, palette)
 
 
 app = Flask(__name__)
@@ -193,12 +308,12 @@ def image_to_base64(path):
         return base64.b64encode(img_file.read()).decode('utf-8')
 
 
-latest_path = None  # 전역 변수
+latest_paths = []  # 전역 변수
 
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
-    global latest_path
+    global latest_paths
 
     if 'file' not in request.files:
         return jsonify({'success': False, 'message': '파일이 없습니다'}), 400
@@ -209,21 +324,24 @@ def upload_image():
 
     save_path = os.path.join(UPLOAD_FOLDER, 'capture.jpg')
     file.save(save_path)
-    print(f'✅ 원본 이미지 저장 완료: {save_path}')
+    print(f' 원본 이미지 저장 완료: {save_path}')
 
     # Create ID photo style image
     try:
         # 1. 먼저 ID 사진 스타일로 크롭
         id_photo_path = create_id_photo(save_path)
-        print(f'✅ ID 사진 스타일 변환 완료: {id_photo_path}')
+        print(f' ID 사진 스타일 변환 완료: {id_photo_path}')
 
-        # 2. 배경 제거 및 하얀색 배경 적용
-        whitebg_path = remove_background_rembg(id_photo_path)
-        print(f'✅ 배경 제거 및 하얀색 배경 적용 완료: {whitebg_path}')
+        # 2. 배경 제거 및 하얀색 배경 적용 << 퍼스널컬러로 대체
+        #whitebg_path = remove_background_rembg(id_photo_path)
+        #print(f' 배경 제거 및 하얀색 배경 적용 완료: {whitebg_path}')
 
-        latest_path = whitebg_path
+        # 2. 배경 제거 및 퍼스널 컬러 배경 적용
+        latest_paths = generate_recommended_images(id_photo_path)
+        print(f' 배경 제거 및 퍼스널 배경 적용 완료: {latest_paths}')
+
     except Exception as e:
-        print(f'❌ 이미지 처리 중 오류 발생: {str(e)}')
+        print(f' 이미지 처리 중 오류 발생: {str(e)}')
         return jsonify({'success': False, 'message': f'이미지 처리 오류: {str(e)}'}), 500
 
     return jsonify({'success': True, 'message': 'ID 사진 변환 완료'})
@@ -231,11 +349,11 @@ def upload_image():
 
 @app.route('/uploaded', methods=['GET'])
 def get_uploaded_images():
-    if latest_path and os.path.exists(latest_path):
-        base64_img = image_to_base64(latest_path)
+    if latest_paths and all(os.path.exists(p) for p in latest_paths):
+        base64_imgs = [image_to_base64(p) for p in latest_paths]
         return jsonify({
             'success': True,
-            'images': [base64_img, base64_img, base64_img]  # 향후 정장 합성 버전으로 대체됨
+            'images': base64_imgs #[base64_img, base64_img, base64_img]를 for문으로 만들었기 때문에 이렇게 대체 가능함. 향후 정장 합성 버전으로 대체됨
         })
     else:
         return jsonify({'success': False, 'message': '업로드된 이미지가 없습니다'}), 404

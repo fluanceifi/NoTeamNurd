@@ -24,7 +24,7 @@ export default function CapturePage() {
       const blob = await (await fetch(imageSrc)).blob();
       const file = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
 
-      // 📤 Flask로 전송
+      // Flask로 전송
       const formData = new FormData();
       formData.append('file', file);
 
