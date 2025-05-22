@@ -1,2 +1,2 @@
 # NoTeamNurd
-personal color recomandation project with openCV &amp; SpringBoot
+personal color recomandation project with openCV &amp; React
