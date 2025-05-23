@@ -1,0 +1,12 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+uploads/
+
+# IDE 설정
+.idea/
+
+# macOS
+.DS_Store
