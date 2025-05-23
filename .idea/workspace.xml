@@ -4,101 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e1e3fb4-d8aa-48d3-86af-d0ba21c53978" name="변경" comment="페이스 파싱 파일 추가">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/NoTeamNurd.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.idea/AutomaticFaceSmoothing.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/facesmoothing/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/facesmoothing/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/facesmoothing/smoothing.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/facesmoothing/utility/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/facesmoothing/utility/heic2png.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/facesmoothing/utility/typeCheck.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/resources/Hillary-Rodham-Clinton-2003.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/resources/Hillary-Rodham-Clinton-2003_rectangle.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/resources/Hillary-Rodham-Clinton-2003_smoothing.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing/setup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/AutomaticFaceSmoothing~SeungJun.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomaticFaceSmoothing~SeungJun/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/camera.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/checkpoints/experiment_1/opt_test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/clipping.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/face_Mesh.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/facesmoothing_integration.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/static/captured.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/static/captured_clipping.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/static/clipped_FaceMesh.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/static/clipped_smoothing.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/static/clipped_smoothing_smoothing.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/templates/upload.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backEnd/test-api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_whitebg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/capture/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/globals.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/result/expression/[id]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/result/final/[id]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/result/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/results/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/upload/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/eslint.config.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/next.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/postcss.config.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/file.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/fonts/BMDOHYEON_ttf.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/globe.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/images/autumn.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/images/photo1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/images/photo2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/images/photo3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/images/spring.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/images/summer.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/images/winter.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/next.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/overlays/guide.png" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/public/overlays/guide.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/vercel.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/window.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" />
-    </list>
+    <list default="true" id="6e1e3fb4-d8aa-48d3-86af-d0ba21c53978" name="변경" comment="페이스 파싱 파일 추가" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,36 +65,36 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "JavaScript 디버그.upload.html.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.camera.executor": "Run",
-    "Python.clipping.executor": "Run",
-    "Python.face_Mesh.executor": "Run",
-    "Python.face_parser.executor": "Run",
-    "Python.face_parsing2.executor": "Run",
-    "Python.facesmoothing.executor": "Run",
-    "Python.facesmoothing_integration.executor": "Run",
-    "Python.paseParsing.executor": "Run",
-    "Python.smileMaker.executor": "Run",
-    "Python.test-api.executor": "Run",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "SeungJun__Branch",
-    "last_opened_file_path": "/Users/sjy/Documents/GitHub/NoTeamNurd/backEnd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Errors",
-    "ts.external.directory.path": "/Applications/PyCharm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;JavaScript 디버그.upload.html.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.camera.executor&quot;: &quot;Run&quot;,
+    &quot;Python.clipping.executor&quot;: &quot;Run&quot;,
+    &quot;Python.face_Mesh.executor&quot;: &quot;Run&quot;,
+    &quot;Python.face_parser.executor&quot;: &quot;Run&quot;,
+    &quot;Python.face_parsing2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.facesmoothing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.facesmoothing_integration.executor&quot;: &quot;Run&quot;,
+    &quot;Python.paseParsing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.smileMaker.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test-api.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;SeungJun__Branch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/sjy/Documents/GitHub/NoTeamNurd/backEnd&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/PyCharm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backEnd" />
@@ -250,6 +156,7 @@
       <workItem from="1747980109420" duration="1164000" />
       <workItem from="1747981633051" duration="19000" />
       <workItem from="1747981659774" duration="760000" />
+      <workItem from="1747982425240" duration="284000" />
     </task>
     <task id="LOCAL-00001" summary="실행 앱과 카메라 기능 구분">
       <option name="closed" value="true" />
@@ -315,7 +222,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NoTeamNurd$app.coverage" NAME="app 커버리지 결과" MODIFIED="1747833018062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/NoTeamNurd$app.coverage" NAME="app 커버리지 결과" MODIFIED="1747982441903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
     <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$test_api.coverage" NAME="test-api 커버리지 결과" MODIFIED="1747215544836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
     <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$app.coverage" NAME="app 커버리지 결과" MODIFIED="1747982140853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
     <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$smileMaker.coverage" NAME="smileMaker 커버리지 결과" MODIFIED="1747219489020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
