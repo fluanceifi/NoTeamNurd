@@ -12,10 +12,11 @@ export default function ResultPage() {
   const router = useRouter();
   const [images, setImages] = useState<ImageOption[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [personalTone, setPersonalTone] = useState<string>('');  // 신규: 분석된 퍼스널 톤 저장
 
   useEffect(() => {
     // Flask 서버에서 업로드 결과 요청
-    fetch('http://localhost:5050/uploaded')  // 🔁 나중엔 이 부분을 `/upload`의 응답 처리 후로 옮길 수 있음
+    fetch('http://localhost:5050/uploaded')
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -31,6 +32,21 @@ export default function ResultPage() {
       });
   }, []);
 
+  useEffect(() => {
+    if (images.length === 0) return;  // 이미지가 없으면 호출하지 않음
+    // Flask 서버에서 퍼스널 컬러 톤 요청
+    fetch('http://localhost:5050/personal-color')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setPersonalTone(data.color);  // { color: "봄 라이트" } 등 반환
+        }
+      })
+      .catch(err => {
+        console.error('퍼스널컬러 로드 실패:', err);
+      });
+  }, [images]);
+
   const handleSelect = (id: number) => {
     setSelectedId(id);
   };
@@ -38,7 +54,6 @@ export default function ResultPage() {
   const handleNext = () => {
     if (selectedId !== null) {
       console.log('선택된 이미지 ID:', selectedId);
-      // 나중에 선택한 이미지 서버로 전송하거나 페이지 이동 가능
       router.push(`/result/expression/${selectedId}`);
     }
   };
@@ -49,6 +64,12 @@ export default function ResultPage() {
         <h1 className="text-2xl font-bold text-center mb-6">
           퍼스널컬러 분석 결과
         </h1>
+
+        {personalTone && (
+          <p className="text-center mb-4 text-lg">
+            추천 퍼스널 톤: <span className="font-semibold">{personalTone}</span>
+          </p>
+        )}
 
         <p className="text-center mb-8 text-gray-700">
           아래 이미지 중 하나를 선택해주세요. (임시 결과)
