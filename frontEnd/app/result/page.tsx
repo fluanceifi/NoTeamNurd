@@ -12,6 +12,7 @@ export default function ResultPage() {
   const router = useRouter();
   const [images, setImages] = useState<ImageOption[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [colorCategory, setColorCategory] = useState<string | null>(null);
 
   useEffect(() => {
     // Flask 서버에서 업로드 결과 요청
@@ -24,6 +25,7 @@ export default function ResultPage() {
             base64: b64,
           }));
           setImages(imgList);
+          setColorCategory(data.color_category);
         }
       })
       .catch(err => {
@@ -49,6 +51,13 @@ export default function ResultPage() {
         <h1 className="text-2xl font-bold text-center mb-6">
           퍼스널컬러 분석 결과
         </h1>
+
+
+        {colorCategory && (
+            <p className="text-center text-lg font-medium text-pink-600 mb-6">
+            당신의 퍼스널컬러는 <strong>{colorCategory}</strong>입니다.
+            </p>
+        )}
 
         <p className="text-center mb-8 text-gray-700">
           아래 이미지 중 하나를 선택해주세요. (임시 결과)

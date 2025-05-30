@@ -11,6 +11,7 @@ export default function UploadPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null); // ✅ File 객체 저장용
   const [isUploading, setIsUploading] = useState(false);
+  const [gender, setGender] = useState<'male' | 'female'>('male');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
@@ -31,6 +32,7 @@ export default function UploadPage() {
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('gender', gender);
 
       const res = await fetch('http://127.0.0.1:5050/upload', {
   method: 'POST',
@@ -64,6 +66,33 @@ export default function UploadPage() {
               증명사진으로 변환할 이미지를 선택해주세요
             </p>
           </div>
+
+<div className="flex justify-center gap-4">
+  <label className={`px-4 py-2 rounded-lg cursor-pointer border ${gender === 'male' ? 'bg-blue-100 border-blue-500 text-blue-800 font-semibold' : 'border-gray-300 text-gray-600'}`}>
+    <input
+      type="radio"
+      name="gender"
+      value="male"
+      checked={gender === 'male'}
+      onChange={() => setGender('male')}
+      className="hidden"
+    />
+    남성
+  </label>
+
+  <label className={`px-4 py-2 rounded-lg cursor-pointer border ${gender === 'female' ? 'bg-pink-100 border-pink-500 text-pink-800 font-semibold' : 'border-gray-300 text-gray-600'}`}>
+    <input
+      type="radio"
+      name="gender"
+      value="female"
+      checked={gender === 'female'}
+      onChange={() => setGender('female')}
+      className="hidden"
+    />
+    여성
+  </label>
+</div>
+
 
    <div
   className="relative aspect-[3/4] max-w-xs mx-auto border-2 border-dashed border-gray-300 rounded-lg overflow-hidden hover:border-gray-400 transition-colors cursor-pointer"
