@@ -21,6 +21,7 @@ latest_paths = []
 outfit_preview_paths = {}  # {'original': 'path1', 'formal': 'path2', 'casual': 'path3'}
 final_image_path = None
 selected_gender = None
+latest_color_category = None
 
 def create_id_photo(image_path: str, target_ratio=(3, 4)) -> str:
     """
@@ -307,6 +308,8 @@ def analyze_face(image_path):
 
 
 def get_recommended_backgrounds(hsv_data: dict) -> list:
+    global latest_color_category
+
     h, s, v = hsv_data['h'], hsv_data['s'] / 100, hsv_data['v'] / 100
     print(f"🔥 분석된 HSV 값: H={h:.1f}, S={s:.2f}, V={v:.2f}")
     tone_table = [
@@ -343,19 +346,17 @@ def get_recommended_backgrounds(hsv_data: dict) -> list:
     # 계절 카테고리 판단
     for tone_name, category, hr, sr, vr in tone_table:
         if hr[0] <= h <= hr[1] and sr[0] <= s <= sr[1] and vr[0] <= v <= vr[1]:
+            latest_color_category = tone_name
             return tone_palette[category]
 
     # fallback
+    latest_color_category = 'Unknown'
     return [(200, 200, 200), (180, 180, 180), (160, 160, 160)]  # 회색 계열
 
 
 def apply_recommended_backgrounds(foreground_img: Image.Image, base_path: str, rgb_list: list,
-                                  enhancement_level: str = "medium") -> list:
-    """
-    배경을 적용하고 각 이미지에 뽀샵 효과를 적용합니다.
-    """
+                                  enhancement_level: str = "light") -> list:  # 기본값도 "light"로 바꿈
     paths = []
-    enhancement_levels = ["light", "medium", "strong"]  # 3가지 강도로 제공
 
     for idx, rgb in enumerate(rgb_list):
         # 배경 적용
@@ -363,15 +364,15 @@ def apply_recommended_backgrounds(foreground_img: Image.Image, base_path: str, r
         bg.paste(foreground_img, (0, 0), foreground_img)
         bg = bg.convert("RGB")
 
-        # 뽀샵 효과 적용 (각기 다른 강도로)
-        current_enhancement = enhancement_levels[idx % len(enhancement_levels)]
-        enhanced_bg = apply_natural_enhancement(bg, current_enhancement)
+        # ✅ 항상 light 보정으로 고정
+        enhanced_bg = apply_natural_enhancement(bg, enhancement_level)
 
-        path = base_path.replace('.jpg', f'_reco{idx + 1}_{current_enhancement}.jpg')
+        path = base_path.replace('.jpg', f'_reco{idx + 1}_{enhancement_level}.jpg')
         enhanced_bg.save(path)
         paths.append(path)
 
     return paths
+
 
 
 def generate_recommended_images(image_path: str) -> list:
@@ -389,44 +390,83 @@ def generate_recommended_images(image_path: str) -> list:
 
 def setup_outfit_assets():
     """
-    옷 이미지 파일들을 설정합니다.
+    성별별 옷 이미지 파일들을 설정합니다.
     """
-    assets_dir = 'assets'
-    os.makedirs(assets_dir, exist_ok=True)
+    # 성별별 디렉토리 생성
+    male_dir = 'assets/male'
+    female_dir = 'assets/female'
 
-    required_files = [
-        'assets/formal_suit.jpg',
-        'assets/casual_shirt.jpg'
-    ]
+    os.makedirs(male_dir, exist_ok=True)
+    os.makedirs(female_dir, exist_ok=True)
 
-    for file_path in required_files:
-        if not os.path.exists(file_path):
-            print(f"⚠️  필요한 옷 이미지가 없습니다: {file_path}")
-            print("해당 경로에 옷 이미지를 추가해주세요.")
+    # 성별별 필요 파일 목록
+    required_files = {
+        'male': [
+            'assets/male/formal_suit.jpg',  # 남성 정장
+            'assets/male/casual_shirt.jpg'  # 남성 캐주얼
+        ],
+        'female': [
+            'assets/female/formal_dress.jpg',  # 여성 정장/드레스
+            'assets/female/casual_blouse.jpg'  # 여성 캐주얼
+        ]
+    }
+
+    # 파일 존재 여부 확인
+    missing_files = []
+    for gender, files in required_files.items():
+        for file_path in files:
+            if not os.path.exists(file_path):
+                missing_files.append(file_path)
+                print(f"⚠️  필요한 {gender} 옷 이미지가 없습니다: {file_path}")
+
+    if missing_files:
+        print("\n📁 다음 구조로 옷 이미지를 추가해주세요:")
+        print("assets/")
+        print("├── male/")
+        print("│   ├── formal_suit.jpg")
+        print("│   └── casual_shirt.jpg")
+        print("└── female/")
+        print("    ├── formal_dress.jpg")
+        print("    └── casual_blouse.jpg")
+    else:
+        print("✅ 모든 성별별 옷 이미지가 준비되었습니다.")
 
     return True
 
 
 def apply_outfit_synthesis(person_image_path: str, outfit_type: str) -> str:
     """
-    IDM-VTON API를 사용해서 옷을 합성합니다.
+    IDM-VTON API를 사용해서 성별에 맞는 옷을 합성합니다.
     """
+    global selected_gender
+
     try:
+        # 성별별 옷 경로 설정
         outfit_paths = {
-            'formal': 'assets/formal_suit.jpg',
-            'casual': 'assets/casual_shirt.jpg',
-            'original': person_image_path
+            'male': {
+                'formal': 'assets/male/formal_suit.jpg',
+                'casual': 'assets/male/casual_shirt.jpg',
+                'original': person_image_path
+            },
+            'female': {
+                'formal': 'assets/female/formal_dress.jpg',
+                'casual': 'assets/female/casual_blouse.jpg',
+                'original': person_image_path
+            }
         }
 
         if outfit_type == 'original':
             return person_image_path
 
-        cloth_path = outfit_paths.get(outfit_type)
+        # 현재 성별에 맞는 옷 경로 선택
+        current_gender = selected_gender or 'male'  # 기본값 male
+        cloth_path = outfit_paths.get(current_gender, {}).get(outfit_type)
+
         if not cloth_path or not os.path.exists(cloth_path):
-            print(f"옷 이미지를 찾을 수 없습니다: {cloth_path}")
+            print(f"❌ {current_gender} {outfit_type} 옷 이미지를 찾을 수 없습니다: {cloth_path}")
             return person_image_path
 
-        print(f"🔄 {outfit_type} 스타일 합성 시작...")
+        print(f"🔄 {current_gender} {outfit_type} 스타일 합성 시작...")
 
         # 코랩에서 사용한 코드와 동일
         client = Client("yisol/IDM-VTON")
@@ -438,7 +478,7 @@ def apply_outfit_synthesis(person_image_path: str, outfit_type: str) -> str:
                 "composite": None
             },
             garm_img=file(cloth_path),
-            garment_des=f"{outfit_type} clothing",
+            garment_des=f"{current_gender} {outfit_type} clothing",  # 성별 정보도 포함
             is_checked=True,
             is_checked_crop=False,
             denoise_steps=30,
@@ -446,11 +486,11 @@ def apply_outfit_synthesis(person_image_path: str, outfit_type: str) -> str:
             api_name="/tryon"
         )
 
-        result_path = person_image_path.replace('.jpg', f'_{outfit_type}_tryon.jpg')
+        result_path = person_image_path.replace('.jpg', f'_{current_gender}_{outfit_type}_tryon.jpg')
 
         if os.path.exists(result[0]):
             shutil.copy2(result[0], result_path)
-            print(f"✅ {outfit_type} 합성 완료: {result_path}")
+            print(f"✅ {current_gender} {outfit_type} 합성 완료: {result_path}")
             return result_path
         else:
             print(f"❌ 합성 결과 파일을 찾을 수 없습니다: {result[0]}")
@@ -478,7 +518,7 @@ latest_paths = []  # 전역 변수
 
 @app.route('/upload', methods=['POST'])
 def upload_image():
-    global latest_paths
+    global latest_paths, selected_gender
 
     if 'file' not in request.files:
         return jsonify({'success': False, 'message': '파일이 없습니다'}), 400
@@ -486,6 +526,10 @@ def upload_image():
     file = request.files['file']
     if file.filename == '':
         return jsonify({'success': False, 'message': '파일명이 비어 있습니다'}), 400
+
+    # 성별 정보 받기
+    selected_gender = request.form.get('gender', 'male')  # 기본값은 'male'
+    print(f"🔥 선택된 성별: {selected_gender}")
 
     save_path = os.path.join(UPLOAD_FOLDER, 'capture.jpg')
     file.save(save_path)
@@ -526,7 +570,8 @@ def get_uploaded_images():
         return jsonify({
             'success': True,
             'images': base64_imgs,  # 기존 호환성 유지
-            'image_info': image_info  # 새로운 상세 정보
+            'image_info': image_info,  # 새로운 상세 정보
+            'color_category': latest_color_category
         })
     else:
         return jsonify({'success': False, 'message': '업로드된 이미지가 없습니다'}), 404
