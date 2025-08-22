@@ -40,8 +40,9 @@ https://github.com/FacePerceiver/facer
 https://github.com/yisol/IDM-VTON
 
 ---
-## 데이터 파이프라인
 
+## 데이터 파이프라인
+<img width="1024" height="1024" alt="Image" src="https://github.com/user-attachments/assets/508d86b1-1272-470b-9217-aa42bd26aa2f" />
 
 
 
