@@ -31,7 +31,8 @@ https://github.com/yisol/IDM-VTON
 ---
 ## 데이터 파이프라인
 1. 이미지 업로드 및 규격화
-사용자 이미지를 수신하고 OpenCV의 CascadeClassifier를 이용해 얼굴을 탐지한 후, 3x4 증명사진 비율로 이미지를 자동 크롭합니다.
+- 사용자 이미지를 수신하고 OpenCV의 CascadeClassifier를 이용해 얼굴을 탐지한 후,
+- 3x4 증명사진 비율로 이미지를 자동 크롭합니다.
 ```python
 # app.py
 @app.route('/upload', methods=['POST'])
@@ -42,7 +43,8 @@ def upload_image():
 ```
 
 2. AI 분석 및 추천 이미지 생성
-규격화된 이미지에서 배경을 제거하고, facer로 피부 톤을 분석하여 어울리는 배경색을 추천합니다. 그 후 자연스러운 보정 효과를 적용해 3개의 후보 이미지를 생성합니다.
+- 규격화된 이미지에서 배경을 제거하고, facer로 피부 톤을 분석하여 어울리는 배경색을 추천합니다.
+- 그 후 자연스러운 보정 효과를 적용해 3개의 후보 이미지를 생성합니다.
 ```python
 # main.py
 def generate_recommended_images(image_path: str) -> list:
@@ -56,7 +58,8 @@ def generate_recommended_images(image_path: str) -> list:
     # 3. 추천 배경 적용 및 이미지 보정
     return apply_recommended_backgrounds(foreground, image_path, palette)
 ```
-get_recommended_background는 이런 형태로 존재하여 피부 톤에 맞는 색이 적용됩니다.
+
+- get_recommended_background는 이런 형태로 존재하여 피부 톤에 맞는 색이 적용됩니다.
 ```python
     tone_table = [
         # (톤 이름, 계절 카테고리, H 범위, S 범위, V 범위)
@@ -97,7 +100,8 @@ get_recommended_background는 이런 형태로 존재하여 피부 톤에 맞는
 ```
 
 3. 가상 의상 피팅
-사용자가 선택한 이미지에 IDM-VTON 모델을 사용하여 가상으로 옷을 합성합니다. gradio_client를 통해 외부 API와 통신합니다.
+- 사용자가 선택한 이미지에 IDM-VTON 모델을 사용하여 가상으로 옷을 합성합니다.
+- gradio_client를 통해 외부 API와 통신합니다.
 ```python
 # main.py
 def apply_outfit_synthesis(person_image_path: str, outfit_type: str) -> str:
@@ -114,8 +118,8 @@ def apply_outfit_synthesis(person_image_path: str, outfit_type: str) -> str:
     # ...
 ```
 
-4. 💾 최종 결과 전송
-사용자가 모든 옵션(배경, 의상)을 선택하면, 미리 생성해둔 최종 이미지 파일 경로를 바탕으로 사용자에게 이미지를 전송합니다.
+4. 최종 결과 전송
+- 사용자가 모든 옵션(배경, 의상)을 선택하면, 미리 생성해둔 최종 이미지 파일 경로를 바탕으로 사용자에게 이미지를 전송합니다.
 ```python
 # app.py
 @app.route('/final-image', methods=['GET'])
