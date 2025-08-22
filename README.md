@@ -29,7 +29,8 @@
 
 
 
----
+---<img width="1024" height="1024" alt="Pipeline" src="https://github.com/user-attachments/assets/41b95feb-cf9d-407d-a116-96102628201c" />
+
 ## 외부 API
 ### 백그라운드 제거 
 https://github.com/danielgatis/rembg  
@@ -40,6 +41,9 @@ https://github.com/yisol/IDM-VTON
 
 ---
 ## 데이터 파이프라인
+
+
+
 
 ### 1. 이미지 업로드 및 규격화
 - 사용자 이미지를 수신하고 OpenCV의 CascadeClassifier를 이용해 얼굴을 탐지한 후,
