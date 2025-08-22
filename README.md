@@ -29,8 +29,7 @@
 
 
 
----<img width="1024" height="1024" alt="Pipeline" src="https://github.com/user-attachments/assets/41b95feb-cf9d-407d-a116-96102628201c" />
-
+---
 ## 외부 API
 ### 백그라운드 제거 
 https://github.com/danielgatis/rembg  
