@@ -1,2 +1,2 @@
-# NoTeamNurd
-personal color recomandation project with openCV &amp; python
+# Personal color-based profile picture web application
+---
