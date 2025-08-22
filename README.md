@@ -41,7 +41,7 @@ https://github.com/yisol/IDM-VTON
 ---
 
 ## 데이터 파이프라인
-<img width="640" height="640" alt="Image" src="https://github.com/user-attachments/assets/508d86b1-1272-470b-9217-aa42bd26aa2f" />
+<img width="720" height="720" alt="Image" src="https://github.com/user-attachments/assets/09dc0396-cddd-4751-b784-308b7f637fc5" />
 
 
 
