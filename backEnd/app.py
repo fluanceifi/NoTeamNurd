@@ -11,7 +11,7 @@ import facer
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import ndimage
-
+from flask_mail import Mail, Message
 from gradio_client import Client, file
 import shutil
 
@@ -249,7 +249,7 @@ def analyze_face(image_path):
     seg_probs = seg_logits.softmax(dim=1)
     parsed_classes = seg_probs.argmax(dim=1)
 
-    skin_mask = (parsed_classes == 1).squeeze().cpu().numpy().astype(bool)  # 피부 부위 마스크
+    skin_mask = (parsed_classes[0] == 1).squeeze(0).squeeze(0).cpu().numpy().astype(bool)
 
     # 🛠 마스크가 정상적으로 생성되었는지 확인
     print(f"🔍 피부 영역 픽셀 개수: {skin_mask.sum()}")
@@ -568,6 +568,18 @@ def apply_outfit_synthesis(person_image_path: str, outfit_type: str) -> str:
 app = Flask(__name__)
 CORS(app)
 
+# Flask-Mail 설정 (Gmail 예시)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'dbtmdwns990203@gmail.com'  # 실제 사용하는 구글 이메일 주소
+app.config['MAIL_PASSWORD'] = 'dfsj nkgf heqi lqgw'      # 구글 앱 비밀번호
+app.config['MAIL_DEFAULT_SENDER'] = ('니톤내톤', 'dbtmdwns990203@gmail.com') # 보내는 사람 이름/주소
+
+# Mail 객체 초기화
+mail = Mail(app)
+
+
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -578,6 +590,7 @@ def image_to_base64(path):
 
 
 latest_paths = []  # 전역 변수
+
 
 
 @app.route('/upload', methods=['POST'])
@@ -772,6 +785,55 @@ def get_final_image():
     except Exception as e:
         return jsonify({'success': False, 'message': f'이미지 로드 오류: {str(e)}'}), 500
 
+# ... (기존 /final-image 엔드포인트 아래에 추가)
+
+@app.route('/send-email', methods=['POST'])
+def send_final_image_email():
+    """
+    최종 생성된 이미지를 이메일로 전송합니다.
+    """
+    global final_image_path
+
+    data = request.json
+    recipient_email = data.get('email')
+
+    if not recipient_email:
+        return jsonify({'success': False, 'message': '수신자 이메일 주소가 필요합니다.'}), 400
+
+    if not final_image_path or not os.path.exists(final_image_path):
+        return jsonify({'success': False, 'message': '전송할 최종 이미지가 없습니다.'}), 404
+
+    try:
+        # 이메일 메시지 객체 생성
+        msg = Message(
+            subject="[ID Photo Service] 생성된 증명사진입니다.",
+            recipients=[recipient_email]
+        )
+
+        # 이메일 본문 설정
+        msg.body = "요청하신 증명사진을 첨부합니다. 이용해주셔서 감사합니다."
+        msg.html = "<p>요청하신 증명사진을 첨부합니다.</p><p>이용해주셔서 감사합니다.</p>"
+
+        # 파일 첨부
+        with app.open_resource(final_image_path) as fp:
+            # 파일명만 추출하여 첨부 파일 이름으로 사용
+            file_name = os.path.basename(final_image_path)
+            msg.attach(file_name, 'image/jpeg', fp.read())
+
+        # 이메일 발송
+        mail.send(msg)
+
+        return jsonify({
+            'success': True,
+            'message': f'{recipient_email}(으)로 이미지를 성공적으로 전송했습니다.'
+        })
+
+    except Exception as e:
+        print(f"❌ 이메일 전송 오류: {str(e)}")
+        return jsonify({'success': False, 'message': f'이메일 전송 중 오류가 발생했습니다: {str(e)}'}), 500
+
+
+# ... (if __name__ == '__main__':)
 
 
 if __name__ == '__main__':
