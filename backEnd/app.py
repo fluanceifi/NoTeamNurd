@@ -14,6 +14,7 @@ from scipy import ndimage
 from flask_mail import Mail, Message
 from gradio_client import Client, file
 import shutil
+import password
 
 
 
@@ -573,7 +574,7 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'dbtmdwns990203@gmail.com'  # 실제 사용하는 구글 이메일 주소
-app.config['MAIL_PASSWORD'] = 'dfsj nkgf heqi lqgw'      # 구글 앱 비밀번호
+app.config['MAIL_PASSWORD'] = password.MAIL_PASSWORD      # 구글 앱 비밀번호
 app.config['MAIL_DEFAULT_SENDER'] = ('니톤내톤', 'dbtmdwns990203@gmail.com') # 보내는 사람 이름/주소
 
 # Mail 객체 초기화
