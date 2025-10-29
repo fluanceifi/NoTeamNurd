@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+from dotenv import load_dotenv
 import base64
 from PIL import Image, ImageEnhance, ImageFilter
 import cv2
@@ -14,9 +15,6 @@ from scipy import ndimage
 from flask_mail import Mail, Message
 from gradio_client import Client, file
 import shutil
-import password
-
-
 
 latest_paths = []
 outfit_preview_paths = {}  # {'original': 'path1', 'formal': 'path2', 'casual': 'path3'}
@@ -569,12 +567,15 @@ def apply_outfit_synthesis(person_image_path: str, outfit_type: str) -> str:
 app = Flask(__name__)
 CORS(app)
 
+
+load_dotenv()
+
 # Flask-Mail 설정 (Gmail 예시)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'dbtmdwns990203@gmail.com'  # 실제 사용하는 구글 이메일 주소
-app.config['MAIL_PASSWORD'] = password.MAIL_PASSWORD      # 구글 앱 비밀번호
+app.config['MAIL_PASSWORD'] = os.getenv("MAIL_PASSWORD")      # 구글 앱 비밀번호
 app.config['MAIL_DEFAULT_SENDER'] = ('니톤내톤', 'dbtmdwns990203@gmail.com') # 보내는 사람 이름/주소
 
 # Mail 객체 초기화
