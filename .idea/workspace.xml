@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e1e3fb4-d8aa-48d3-86af-d0ba21c53978" name="변경" comment="페이스 파싱 파일 추가">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco2_light.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco2_light.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_casual_tryon.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_casual_tryon.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_formal_tryon.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_formal_tryon.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/result/final/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/result/final/[id]/page.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="61c7a5a3-d895-429b-844b-1ad955bc227e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,239 +29,119 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <favorite-branches>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="develop" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </favorite-branches>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="junkyu_branch" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="2ukg77JHKSJZeNbn9C5xNiRtwES" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2unnakEs6iRMx5ISSNa2FVQLyVd" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
-    <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;JavaScript 디버그.upload.html.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.camera.executor&quot;: &quot;Run&quot;,
-    &quot;Python.clipping.executor&quot;: &quot;Run&quot;,
-    &quot;Python.face_Mesh.executor&quot;: &quot;Run&quot;,
-    &quot;Python.face_parser.executor&quot;: &quot;Run&quot;,
-    &quot;Python.face_parsing2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.facesmoothing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.facesmoothing_integration.executor&quot;: &quot;Run&quot;,
-    &quot;Python.paseParsing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.smileMaker.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test-api.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;SeungJun__Branch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/sjy/Documents/GitHub/NoTeamNurd&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;프로젝트&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/sjy/Documents/GitHub/NoTeamNurd/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.202215064_바이오헬스코딩수학_중간고사.executor": "Run",
+    "Python.app.executor": "Run",
+    "Python.face_parsing2.executor": "Run",
+    "Python.paseParsing.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/release-sjy",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "build.tools",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/backEnd" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/expression" />
-    </key>
+}]]></component>
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="NoTeamNurd" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (pythonProject)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="face_parsing2" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="NoTeamNurd" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (pythonProject)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/face_parsing2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
-        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.17890.14" />
+        <option value="bundled-python-sdk-5b207ade9991-7e9c3bbb6e34-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.17890.14" />
       </set>
     </attachedChunks>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="디폴트 작업">
-      <changelist id="6e1e3fb4-d8aa-48d3-86af-d0ba21c53978" name="변경" comment="" />
-      <created>1742797815605</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="61c7a5a3-d895-429b-844b-1ad955bc227e" name="Changes" comment="" />
+      <created>1742893271536</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1742797815605</updated>
-      <workItem from="1742797816668" duration="47000" />
-      <workItem from="1742871376921" duration="163000" />
-      <workItem from="1742871557066" duration="3930000" />
-      <workItem from="1742878591053" duration="2415000" />
-      <workItem from="1742961148551" duration="694000" />
-      <workItem from="1743334892919" duration="4871000" />
-      <workItem from="1743339881743" duration="911000" />
-      <workItem from="1743393600980" duration="3783000" />
-      <workItem from="1743398339911" duration="83000" />
-      <workItem from="1746675024917" duration="1624000" />
-      <workItem from="1746676672851" duration="10210000" />
-      <workItem from="1747187041730" duration="2000" />
-      <workItem from="1747187117906" duration="117000" />
-      <workItem from="1747187380353" duration="879000" />
-      <workItem from="1747188271464" duration="10000" />
-      <workItem from="1747188308926" duration="185000" />
-      <workItem from="1747188588979" duration="711000" />
-      <workItem from="1747189304484" duration="761000" />
-      <workItem from="1747190069608" duration="2000" />
-      <workItem from="1747191077340" duration="3568000" />
-      <workItem from="1747202607891" duration="192000" />
-      <workItem from="1747202850660" duration="562000" />
-      <workItem from="1747203523216" duration="16829000" />
-      <workItem from="1747359234069" duration="452000" />
-      <workItem from="1747359689214" duration="3338000" />
-      <workItem from="1747566645275" duration="167000" />
-      <workItem from="1747566846066" duration="581000" />
-      <workItem from="1747734321637" duration="947000" />
-      <workItem from="1747819024855" duration="850000" />
-      <workItem from="1747820443611" duration="4000" />
-      <workItem from="1747820557055" duration="2455000" />
-      <workItem from="1747827790574" duration="12134000" />
-      <workItem from="1747978598239" duration="341000" />
-      <workItem from="1747978967728" duration="778000" />
-      <workItem from="1747980109420" duration="1164000" />
-      <workItem from="1747981633051" duration="19000" />
-      <workItem from="1747981659774" duration="760000" />
-      <workItem from="1747982425240" duration="284000" />
-      <workItem from="1748601737646" duration="1055000" />
-      <workItem from="1748708119248" duration="886000" />
-      <workItem from="1748926784579" duration="1496000" />
-      <workItem from="1749089606106" duration="3406000" />
-      <workItem from="1755494735059" duration="3000" />
-      <workItem from="1755497647369" duration="52000" />
-      <workItem from="1755851196226" duration="296000" />
-      <workItem from="1755851563742" duration="732000" />
-      <workItem from="1755853977445" duration="2547000" />
-      <workItem from="1757554191347" duration="1237000" />
-      <workItem from="1759155177039" duration="2770000" />
-      <workItem from="1760431370477" duration="4000" />
-      <workItem from="1761728335394" duration="74000" />
-      <workItem from="1761728420406" duration="2364000" />
-      <workItem from="1761744288734" duration="1000" />
-      <workItem from="1761748606058" duration="1258000" />
-      <workItem from="1762178910104" duration="958000" />
+      <updated>1742893271536</updated>
+      <workItem from="1742893272769" duration="790000" />
+      <workItem from="1743331641445" duration="250000" />
+      <workItem from="1743331901673" duration="2807000" />
+      <workItem from="1747365204770" duration="64000" />
+      <workItem from="1747978466363" duration="19000" />
+      <workItem from="1760782790752" duration="242000" />
+      <workItem from="1762178856681" duration="785000" />
     </task>
-    <task id="LOCAL-00001" summary="실행 앱과 카메라 기능 구분">
-      <option name="closed" value="true" />
-      <created>1742874876481</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1742874876481</updated>
-    </task>
-    <task id="LOCAL-00002" summary="페이스 파싱 파일 추가">
-      <option name="closed" value="true" />
-      <created>1742874889692</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1742874889692</updated>
-    </task>
-    <task id="LOCAL-00003" summary="페이스 파싱 파일 추가">
-      <option name="closed" value="true" />
-      <created>1747369467823</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1747369467823</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnknownFeatures">
-    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="실행 앱과 카메라 기능 구분" />
-    <MESSAGE value="페이스 파싱 파일 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="페이스 파싱 파일 추가" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontEnd/app/results/page.tsx</url>
-          <line>11</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NoTeamNurd$app.coverage" NAME="app 커버리지 결과" MODIFIED="1749089663676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$test_api.coverage" NAME="test-api 커버리지 결과" MODIFIED="1747215544836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$app.coverage" NAME="app 커버리지 결과" MODIFIED="1747982140853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$smileMaker.coverage" NAME="smileMaker 커버리지 결과" MODIFIED="1747219489020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/clipping_cpython_312_pyc$app.coverage" NAME="app 커버리지 결과" MODIFIED="1747978986463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
-    <SUITE FILE_PATH="coverage/NoTeamNurd$paseParsing.coverage" NAME="paseParsing 커버리지 결과" MODIFIED="1742961762932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$camera.coverage" NAME="camera 커버리지 결과" MODIFIED="1747205949293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/clipping_py$clipping.coverage" NAME="clipping 커버리지 결과" MODIFIED="1747187852342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$facesmoothing_integration.coverage" NAME="facesmoothing_integration 커버리지 결과" MODIFIED="1747566725270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/NoTeamNurd$face_parsing2.coverage" NAME="face_parsing2 커버리지 결과" MODIFIED="1743340252321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$facesmoothing.coverage" NAME="facesmoothing 커버리지 결과" MODIFIED="1747368726734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/NoTeamNurd$face_parser.coverage" NAME="face_parser 커버리지 결과" MODIFIED="1743336577051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$face_Mesh.coverage" NAME="face_Mesh 커버리지 결과" MODIFIED="1747281539746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/NoTeamNurd$camera.coverage" NAME="camera 커버리지 결과" MODIFIED="1743338855390" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/clipping_py$app.coverage" NAME="app 커버리지 결과" MODIFIED="1747187759711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$face_parser.coverage" NAME="face_parser 커버리지 결과" MODIFIED="1747734485001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/capture_idphoto_reco1_light_male_formal_tryon_jpg$app.coverage" NAME="app 커버리지 결과" MODIFIED="1762178922504" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$test.coverage" NAME="test 커버리지 결과" MODIFIED="1747217164619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd/GANimation" />
-    <SUITE FILE_PATH="coverage/camera_cpython_312_pyc$clipping.coverage" NAME="clipping 커버리지 결과" MODIFIED="1747566703840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backEnd" />
-    <SUITE FILE_PATH="coverage/NoTeamNurd$clipping.coverage" NAME="clipping 커버리지 결과" MODIFIED="1746691179329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/app_py$app.coverage" NAME="app 커버리지 결과" MODIFIED="1743332343667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NoTeamNurd$app.coverage" NAME="app 커버리지 결과" MODIFIED="1760782895689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/app_py$face_parsing2.coverage" NAME="face_parsing2 커버리지 결과" MODIFIED="1743334528860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NoTeamNurd$202215064__.coverage" NAME="202215064_바이오헬스코딩수학_중간고사 커버리지 결과" MODIFIED="1760782899731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/app_py$paseParsing.coverage" NAME="paseParsing 커버리지 결과" MODIFIED="1743333767945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
