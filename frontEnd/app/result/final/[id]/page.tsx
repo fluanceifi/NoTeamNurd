@@ -82,6 +82,17 @@ export default function FinalPage() {
   };
   // --- ▲▲▲ 여기까지 추가 ▲▲▲ ---
 
+  //폰트 색 추가
+  const getMessageColor = () => {
+    if (emailMessage.startsWith('✅')) {
+      return 'text-green-600'; // 성공 메시지 (초록색)
+    }
+    if (emailMessage.startsWith('❌') || emailMessage.startsWith('⚠️')) {
+      return 'text-red-600'; // 오류 또는 경고 메시지 (빨간색)
+    }
+    return 'text-gray-700'; // 기본 텍스트 색상
+  };
+
   if (loading) {
     return (
         <div className="min-h-screen flex items-center justify-center">
@@ -145,7 +156,7 @@ export default function FinalPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="이메일 주소를 입력하세요"
                     disabled={emailLoading}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500 transition"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-pink-500 focus:border-pink-500 transition text-gray-900 placeholder-gray-500"
                 />
                 <button
                     onClick={handleSendEmail}
@@ -156,7 +167,7 @@ export default function FinalPage() {
                 </button>
               </div>
               {emailMessage && (
-                  <p className="text-center mt-3 text-sm font-medium">
+                  <p className={`text-center mt-3 text-sm font-medium ${getMessageColor()}`}>
                     {emailMessage}
                   </p>
               )}
