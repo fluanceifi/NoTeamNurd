@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e1e3fb4-d8aa-48d3-86af-d0ba21c53978" name="변경" comment="페이스 파싱 파일 추가">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco2_light.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco2_light.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_casual_tryon.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_casual_tryon.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_formal_tryon.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/backend/uploads/capture_idphoto_reco3_light_male_formal_tryon.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/result/final/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/result/final/[id]/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,6 +185,7 @@
       <workItem from="1761744288734" duration="1000" />
       <workItem from="1761748606058" duration="1258000" />
       <workItem from="1762178910104" duration="958000" />
+      <workItem from="1762353992231" duration="6186000" />
     </task>
     <task id="LOCAL-00001" summary="실행 앱과 카메라 기능 구분">
       <option name="closed" value="true" />

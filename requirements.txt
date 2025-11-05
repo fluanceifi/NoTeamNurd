@@ -1,0 +1,13 @@
+# requirements.txt
+Flask==3.1.0
+flask-cors==6.0.0
+python-dotenv==1.2.1
+pillow==10.4.0
+opencv-python-headless==4.11.0.86
+numpy==1.26.4
+rembg==2.0.65
+pyfacer==0.0.5
+matplotlib==3.9.2
+scipy==1.15.2
+Flask-Mail==0.10.0
+gradio_client==1.10.0
