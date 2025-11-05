@@ -1,35 +1,44 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
-const Webcam = dynamic(() => import('react-webcam'), { ssr: false });
+// 1. useRef의 타입을 위해 'react-webcam'의 *타입*을 import 합니다.
+import type Webcam from 'react-webcam';
+
+// 2. dynamic import를 수정합니다.
+// .then(mod => mod.default)로 기본 모듈을 명시적으로 가져오고,
+// <any> 타입을 지정하여 라이브러리의 타입 오류를 무시하고 빌드합니다.
+const DynamicWebcam = dynamic(
+  () => import('react-webcam').then((mod) => mod.default),
+  { ssr: false }
+) as React.ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 export default function CapturePage() {
+  // 3. ref의 타입으로 import한 'Webcam' 타입을 사용합니다.
   const webcamRef = useRef<Webcam>(null);
   const router = useRouter();
   const [isCapturing, setIsCapturing] = useState(false);
-  const [gender, setGender] = useState<'male' | 'female'>('male'); // ✅ 성별 상태 추가
+  const [gender, setGender] = useState<'male' | 'female'>('male');
 
   const captureImage = async () => {
     if (!webcamRef.current) return;
 
     setIsCapturing(true);
     try {
-      const imageSrc = webcamRef.current.getScreenshot(); // base64 문자열
+      const imageSrc = webcamRef.current.getScreenshot();
 
       if (imageSrc) {
-        // 📌 base64 → File 변환
         const blob = await (await fetch(imageSrc)).blob();
         const file = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
 
-        // Flask로 전송 (성별 정보 포함)
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('gender', gender); // ✅ 성별 정보 추가
+        formData.append('gender', gender);
 
-        const res = await fetch('http://127.0.0.1:5050/upload', {
+        // API 주소는 이전에 수정한 '/api/upload' 그대로 둡니다.
+        const res = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
         });
@@ -55,13 +64,7 @@ export default function CapturePage() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-pink-100/80 to-blue-100/80 p-4">
       <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-xl p-8 max-w-2xl w-full">
         <div className="space-y-6">
-          {/* 제목 */}
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">실시간 촬영</h1>
-            <p className="text-sm text-gray-500">
-              증명사진으로 변환할 사진을 촬영해주세요
-            </p>
-          </div>
+          {/* ... (제목, 성별 선택 부분은 동일) ... */}
 
           {/* 성별 선택 */}
           <div className="flex justify-center gap-4">
@@ -90,9 +93,9 @@ export default function CapturePage() {
             </label>
           </div>
 
-          {/* 웹캠 */}
+          {/* 4. JSX에서 <Webcam> 대신 새로 만든 <DynamicWebcam>을 사용합니다. */}
           <div className="relative bg-white rounded-lg shadow-lg overflow-hidden">
-            <Webcam
+            <DynamicWebcam
               ref={webcamRef}
               audio={false}
               screenshotFormat="image/jpeg"

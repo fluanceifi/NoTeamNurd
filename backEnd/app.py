@@ -13,7 +13,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import ndimage
 from flask_mail import Mail, Message
-from gradio_client import Client, file
 import shutil
 
 latest_paths = []

@@ -16,7 +16,7 @@ export default function FinalPage() {
 
   useEffect(() => {
     // 최종 이미지 가져오기
-    fetch('http://localhost:5050/final-image')
+    fetch('/api/final-image')
         .then(res => res.json())
         .then(data => {
           if (data.success) {
@@ -58,7 +58,7 @@ export default function FinalPage() {
     setEmailMessage('');
 
     try {
-      const response = await fetch('http://localhost:5050/send-email', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -114,11 +114,14 @@ export default function FinalPage() {
           <div className="space-y-6">
             <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-lg mx-auto max-w-sm">
               {finalImage ? (
+                  <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                       src={`data:image/jpeg;base64,${finalImage}`}
                       alt="완성된 증명사진"
                       className="object-cover w-full h-full"
                   />
+                  </>
               ) : (
                   <div className="w-full h-full bg-gray-200 flex items-center justify-center">
                     <p>이미지를 불러올 수 없습니다</p>

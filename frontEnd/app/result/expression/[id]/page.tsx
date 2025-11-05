@@ -3,20 +3,29 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
+// 1. outfitOptions를 위한 타입을 명시적으로 정의합니다.
+type OutfitOption = {
+  type: string;
+  image: string;
+  label: string;
+};
+
 export default function ExpressionPage() {
   const params = useParams();
   const router = useRouter();
-  const [outfitOptions, setOutfitOptions] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
+
+  // 2. useState에 타입을 지정합니다.
+  const [outfitOptions, setOutfitOptions] = useState<OutfitOption[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null); // 3. option.type이 문자열이므로 string 타입으로 지정
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 선택된 배경으로 3가지 의상 옵션 생성
-    fetch('http://localhost:5050/outfit-preview', {
+    // API 호출 부분은 이미 '/api' 접두사가 붙어있어 올바릅니다.
+    fetch('/api/outfit-preview', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        selected_index: parseInt(params.id)  // URL의 [id]
+        selected_index: parseInt(params.id as string) // 4. params.id가 string임을 명시
       })
     })
     .then(res => res.json())
@@ -35,35 +44,35 @@ export default function ExpressionPage() {
     });
   }, [params.id]);
 
-  const handleSelect = (optionType) => {
+  const handleSelect = (optionType: string) => { // 5. optionType을 string으로 명시
     setSelectedId(optionType);
   };
 
-const handleNext = () => {
-  if (selectedId !== null) {
-    // 선택된 의상으로 최종 이미지 생성 요청
-    fetch('http://localhost:5050/generate-final', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        selected_index: parseInt(params.id),
-        selected_outfit: selectedId
+  const handleNext = () => {
+    if (selectedId !== null) {
+      // API 호출 부분은 이미 '/api' 접두사가 붙어있어 올바릅니다.
+      fetch('/api/generate-final', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          selected_index: parseInt(params.id as string), // 6. params.id가 string임을 명시
+          selected_outfit: selectedId
+        })
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        console.log('최종 이미지 생성 완료');
-        router.push(`/result/final/${selectedId}`);
-      } else {
-        console.error('최종 이미지 생성 실패:', data.message);
-      }
-    })
-    .catch(error => {
-      console.error('API 호출 실패:', error);
-    });
-  }
-};
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          console.log('최종 이미지 생성 완료');
+          router.push(`/result/final/${selectedId}`);
+        } else {
+          console.error('최종 이미지 생성 실패:', data.message);
+        }
+      })
+      .catch(error => {
+        console.error('API 호출 실패:', error);
+      });
+    }
+  };
 
   if (loading) {
     return (
@@ -88,6 +97,7 @@ const handleNext = () => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* 7. map의 option에도 타입이 자동으로 적용됩니다. */}
           {outfitOptions.map((option) => (
             <div
               key={option.type}
@@ -98,11 +108,14 @@ const handleNext = () => {
                   : 'hover:shadow-lg'
               }`}
             >
+              <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`data:image/jpeg;base64,${option.image}`}
                 alt={option.label}
                 className="object-cover w-full h-full"
               />
+              </>
               <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-3 text-center">
                 {option.label}
               </div>

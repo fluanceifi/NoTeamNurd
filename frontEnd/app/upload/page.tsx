@@ -34,7 +34,7 @@ export default function UploadPage() {
       formData.append('file', file);
       formData.append('gender', gender);
 
-      const res = await fetch('http://127.0.0.1:5050/upload', {
+      const res = await fetch('/api/upload', {
   method: 'POST',
   body: formData,
 });

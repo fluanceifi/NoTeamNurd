@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61c7a5a3-d895-429b-844b-1ad955bc227e" name="Changes" comment="" />
+    <list default="true" id="61c7a5a3-d895-429b-844b-1ad955bc227e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontEnd/app/result/results-content.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backEnd/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backEnd/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/app/capture/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/app/capture/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/app/result/expression/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/app/result/expression/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/app/result/final/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/app/result/final/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/app/result/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/app/result/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/app/results/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontEnd/app/upload/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontEnd/app/upload/page.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,10 +65,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "build.tools",
+    "ts.external.directory.path": "C:\\GitHub\\NoTeamNurd\\frontEnd\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="NoTeamNurd" />
       <option name="ENV_FILES" value="" />
@@ -131,6 +142,7 @@
       <workItem from="1747978466363" duration="19000" />
       <workItem from="1760782790752" duration="242000" />
       <workItem from="1762178856681" duration="785000" />
+      <workItem from="1762366054710" duration="6950000" />
     </task>
     <servers />
   </component>
